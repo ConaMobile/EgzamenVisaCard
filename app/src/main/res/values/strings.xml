@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">EgzamenVisaCard</string>
+    <string name="card_holder">CARD HOLDER</string>
+    <string name="express">EXPRESS</string>
+    <string name="add_new_card">Add New Card</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="cvv">CVV</string>
+</resources>
