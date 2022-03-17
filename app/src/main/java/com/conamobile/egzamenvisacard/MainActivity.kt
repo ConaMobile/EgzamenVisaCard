@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -17,7 +18,6 @@ import com.conamobile.egzamenvisacard.Room.DatabaseClass
 import com.conamobile.egzamenvisacard.Room.UserModel
 import com.conamobile.egzamenvisacard.adapter.RetrofitGetAdapter
 import com.conamobile.egzamenvisacard.adapter.UserAdapter
-import com.conamobile.egzamenvisacard.memory.MySharedPrefarance
 import com.conamobile.egzamenvisacard.model.CardModel
 import com.conamobile.egzamenvisacard.networing.ApiClient
 import com.conamobile.egzamenvisacard.networing.ApiService
@@ -89,13 +89,18 @@ class MainActivity : AppCompatActivity() {
                         list.clear()
                         list.addAll(response.body()!!)
                         adapter.notifyDataSetChanged()
+                        Handler().postDelayed({
+                            adapter.notifyDataSetChanged()
+                        }, 2000)
                         progressBar.visibility = View.GONE
                     }
                 }
 
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onFailure(call: Call<List<CardModel>>, t: Throwable) {
                     Log.d("@@@error", t.localizedMessage)
                     progressBar.visibility = View.GONE
+                    adapter.notifyDataSetChanged()
                 }
             })
         }
